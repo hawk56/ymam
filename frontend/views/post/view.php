@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Post */
@@ -55,6 +56,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    
+    <?php
+
+        foreach($com as $item)
+        {
+            echo $this->render('/comment/_view', [
+                'model' => $item,
+            ]);
+        }
+
+        /*echo "<pre>";
+        print_r($com);
+        echo "</pre>";*/
+    ?>
 
 </div>

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\User;
+use frontend\models\Comment;
 use Yii;
 use common\models\Post;
 use common\models\PostSearch;
@@ -72,7 +73,7 @@ class PostController extends Controller
             'dataProvider' => $dataProvider,
             'allPosts' => $all_posts,
             'pages' => $pages,
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 
@@ -89,8 +90,11 @@ class PostController extends Controller
         $model->views++;
         $model->save();
 
+        $com = Comment::find()->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'com' => $com
         ]);
     }
 
