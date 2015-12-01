@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace frontend\modules\comments\models;
 
 use Yii;
 
@@ -30,7 +30,6 @@ class Comment extends \yii\db\ActiveRecord
         return [
             [['user_id', 'created_at'], 'integer'],
             [['text'], 'string'],
-            [['text'], 'required'],
         ];
     }
 
@@ -45,15 +44,5 @@ class Comment extends \yii\db\ActiveRecord
             'text' => 'Text',
             'created_at' => 'Created At',
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAllComment()
-    {
-        $comments = Comment::find();
-
-        return $comments;
     }
 }

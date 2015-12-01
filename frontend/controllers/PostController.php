@@ -92,6 +92,25 @@ class PostController extends Controller
 
         $com = Comment::find()->all();
 
+        Yii::$app->view->registerMetaTag([
+            'name' => 'description',
+            'content' => $model->description
+        ]);
+        Yii::$app->view->registerMetaTag([
+            'name' => 'keywords',
+            'content' => $model->seo_keywords
+        ]);
+
+        $model_com = new Comment();
+
+        if ($model_com->load(Yii::$app->request->post()) && $model_com->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            /*return $this->render('create', [
+                'model' => $model,
+            ]);*/
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'com' => $com

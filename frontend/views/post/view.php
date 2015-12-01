@@ -58,6 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
 
+        echo \frontend\components\CommentWidget::widget();
+
         foreach($com as $item)
         {
             echo $this->render('/comment/_view', [
