@@ -14,8 +14,10 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use common\models\UploadForm;
+use yii\web\Response;
 use yii\web\UploadedFile;
 use yii\data\Pagination;
+use yii\widgets\ActiveForm;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -113,8 +115,29 @@ class PostController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'com' => $com
+            'com' => $com,
+            'model_com' => $model_com,
         ]);
+    }
+
+    public function actionCreate2()
+    {
+        $model = new \vova07\comments\models\frontend\Comment(['scenario' => 'create']);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                if ($model->save(false)) {
+                    return $this->tree($model);
+                } else {
+                    Yii::$app->response->setStatusCode(500);
+                    return Module::t('comments', 'FRONTEND_FLASH_FAIL_CREATE');
+                }
+            } elseif (Yii::$app->request->isAjax) {
+                Yii::$app->response->setStatusCode(400);
+                return ActiveForm::validate($model);
+            }
+        }
     }
 
     /**

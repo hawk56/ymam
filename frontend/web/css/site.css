@@ -101,5 +101,11 @@ a.desc:after {
 }
 .nav > li > form > button:hover {
 		text-decoration: none;
-	}
+}
+
+.art_link {
+    display: block;
+    position: relative;
+    width: 400px;
+    height: 300px;
 }

@@ -23,3 +23,13 @@ use yii\helpers\Html;
 </div>
 
 <?php ActiveForm::end(); ?>
+
+<?= Html::beginForm(['/post/create2'], 'POST', ['class' => 'form-horizontal', 'data-comment' => 'form', 'data-comment-action' => 'create']) ?>
+<div class="form-group" data-comment="form-group">
+    <div class="col-sm-12">
+        <?= Html::activeTextarea($model, 'text', ['class' => 'form-control']) ?>
+        <?= Html::error($model, 'content', ['data-comment' => 'form-summary', 'class' => 'help-block hidden']) ?>
+    </div>
+</div>
+<?= Html::submitButton('submit', ['class' => 'btn btn-danger btn-lg']); ?>
+<?= Html::endForm(); ?>

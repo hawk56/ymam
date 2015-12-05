@@ -13,8 +13,7 @@ else
 
 <div class="post">
     <h2>
-        <a href="<?= Url::toRoute(['view', 'id' => $model->id]); ?>">
-            <img width="150" src="<?= $model->img; ?>" alt=""><br>
+        <a class="art_link" href="<?= Url::toRoute(['view', 'id' => $model->id]); ?>" style="background-image: url(<?= $model->img; ?>);">
             <?= Html::encode($model->title) ?>
         </a>
     </h2>

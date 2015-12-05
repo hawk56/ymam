@@ -15,6 +15,9 @@ return [
         'comment' => [
             'class' => 'frontend\modules\comments\Comment',
         ],
+        'comments' => [
+            'class' => 'vova07\comments\Module'
+        ]
     ],
     'components' => [
         'user' => [

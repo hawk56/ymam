@@ -1669,7 +1669,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/26ce6b8454c529d1e97672afc30632bf09371268",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/16c4d688f7671b6e70f42426aa95c3e319195194",
                 "reference": "af788cd08fed9c8137c0e941f5650f028b3fb505",
                 "shasum": ""
             },
@@ -1808,7 +1808,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/87cd1f2e0dd454a837607de612b1057840effe8b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/574dcb1d101ae55be230e0c00a2428af6ec4c5c1",
                 "reference": "87cd1f2e0dd454a837607de612b1057840effe8b",
                 "shasum": ""
             },
@@ -2025,7 +2025,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/47df6ab21ce82fe7021ebbc00cff901f76b5029b",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/3037df47eca2e534f62f061415a071f9b5d1a1a4",
                 "reference": "008e69f17a1286c29b8a60082119b7d6eee69082",
                 "shasum": ""
             },
