@@ -21,29 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <!--<?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
-            'description:ntext',
-            'text:ntext',
-            'seo_title',
-            // 'seo_desc',
-            // 'seo_keywords',
-            // 'category',
-            // 'poster_id',
-            // 'created_at',
-            // 'published_at',
-            // 'updated_at',
-            // 'status',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>-->
 
     <?php
        /* echo ListView::widget([
@@ -57,10 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $post,
             ]);
         }
-
+    ?>
+    <div>
+    <?php
         echo LinkPager::widget([
             'pagination' => $pages,
         ]);
     ?>
+    </div>
 
 </div>

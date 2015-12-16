@@ -38,13 +38,22 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['title', 'img', 'description', 'text', 'category'], 'required'],
+            [['title', 'description', 'text', 'category'], 'required'],
             [['description', 'text'], 'string'],
             [['category', 'poster_id', 'views', 'created_at', 'published_at', 'updated_at', 'status'], 'integer'],
             [['title', 'img', 'seo_title', 'seo_desc', 'seo_keywords'], 'string', 'max' => 255],

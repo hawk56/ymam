@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\User;
+use frontend\models\AllImages;
 use frontend\models\Comment;
 use Yii;
 use common\models\Post;
@@ -40,43 +41,79 @@ class PostController extends Controller
      * Lists all Post models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id=0)
     {
-        $searchModel = new PostSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if($id > 0)
+        {
+            $query = Post::find()->where(['category' => $id]);
+            //die(print_r($query));
 
-        $query = Post::find();
-        $countQuery = clone $query;
-        $pages = new Pagination([
-            'totalCount' => $countQuery->count(),
-            'pageSize' => 5
-        ]);
+            $pages = new Pagination([
+                'totalCount' => Post::find()->where(['category' => $id])->count(),
+                'pageSize' => 8
+            ]);
 
-        $posts = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-
-        $all_posts = new ActiveDataProvider([
-            'query' => $query->offset($pages->offset)
+            $posts = $query->offset($pages->offset)
                 ->limit($pages->limit)
-                ->all(),
-        ]);
+                ->all();
 
-        /*$all_posts = new ActiveDataProvider([
-            'query' => Post::find(),
-            'pagination' => [
+            $all_posts = new ActiveDataProvider([
+                'query' => $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all(),
+            ]);
+
+            /*$all_posts = new ActiveDataProvider([
+                'query' => Post::find(),
+                'pagination' => [
+                    'totalCount' => $countQuery->count(),
+                    'pageSize' => 5
+                ],
+            ]);*/
+
+            return $this->render('index', [
+                'allPosts' => $all_posts,
+                'pages' => $pages,
+                'posts' => $posts,
+            ]);
+        }
+        else {
+            $searchModel = new PostSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            $query = Post::find();
+            $countQuery = clone $query;
+            $pages = new Pagination([
                 'totalCount' => $countQuery->count(),
-                'pageSize' => 5
-            ],
-        ]);*/
+                'pageSize' => 8
+            ]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'allPosts' => $all_posts,
-            'pages' => $pages,
-            'posts' => $posts,
-        ]);
+            $posts = $query->offset($pages->offset)
+                ->limit($pages->limit)
+                ->all();
+
+            $all_posts = new ActiveDataProvider([
+                'query' => $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all(),
+            ]);
+
+            /*$all_posts = new ActiveDataProvider([
+                'query' => Post::find(),
+                'pagination' => [
+                    'totalCount' => $countQuery->count(),
+                    'pageSize' => 5
+                ],
+            ]);*/
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'allPosts' => $all_posts,
+                'pages' => $pages,
+                'posts' => $posts,
+            ]);
+        }
     }
 
     /**
@@ -179,6 +216,45 @@ class PostController extends Controller
         }
     }
 
+    public function actionUpload()
+    {
+        $model = new Post();
+        //die(print_r($_POST));
+        if (Yii::$app->request->isPost) {
+            $model->img = UploadedFile::getInstance($model, 'img');
+            if($model->img)
+            {
+                $imageName = md5(time() . $model->img->baseName);
+                $path = Yii::getAlias('@webroot/upload/images/').$imageName. "." .$model->img->extension;
+                $model->img->saveAs($path);
+                $imageFile = $imageName . "." .$model->img->extension;
+
+                $images = new AllImages();
+                $images->name = $imageFile;
+                $images->upload_time = time();
+                $images->save();
+                $path_4_json = 'http://localhost/y-mam/frontend/web/upload/images/'.$imageFile;
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                //$model->attachImage($path);
+                $items['files'][] = [
+                    'deleteType' => "DELETE",
+                    'deleteUrl' => $path_4_json,
+                    'name' => $path_4_json,
+                    'size' => 34269,
+                    'thumbnailUrl' => $path,
+                    'type' => "image/jpeg",
+                    'url' => $path,
+                ];
+                return $items;
+            }
+
+        }
+
+            /*return $this->render('create', [
+                'model' => $model,
+            ]);*/
+    }
+
     /**
      * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -193,7 +269,7 @@ class PostController extends Controller
 
         //$model = new UploadForm();
 
-        if (Yii::$app->request->isPost) {
+        /*if (Yii::$app->request->isPost) {
             $model->img = UploadedFile::getInstance($model, 'img');
 
             if($model->img)
@@ -202,15 +278,31 @@ class PostController extends Controller
                 $path = Yii::getAlias('@webroot/upload/images/').$imageName. "." .$model->img->extension;
                 $model->img->saveAs($path);
                 $imageFile = $imageName . "." .$model->img->extension;
+                $model->attachImage($path);
             }
 
-        }
+        }*/
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->img = $imageFile;
+            //$model->img = $imageFile;
             $model->updated_at = time();
             $model->poster_id = $user->id;
             $model->save();
+            $model->img = UploadedFile::getInstance($model, 'img');
+
+            if($model->img)
+            {
+                $imageName = md5(time() . $model->img->baseName);
+                $path = Yii::getAlias('@webroot/upload/images/').$imageName. "." .$model->img->extension;
+                $model->img->saveAs($path);
+                $imageFile = $imageName . "." .$model->img->extension;
+                $image = $model->getImage();
+                if($image)
+                {
+                    $model->removeImage($image);
+                }
+                $model->attachImage($path);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

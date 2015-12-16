@@ -18,6 +18,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -25,9 +26,34 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<header>
+    <nav class="top_menu">
+        <ul class="top_nav">
+            <li><a href="<?= \yii\helpers\Url::toRoute(['/post/index'])?>">Статьи</a></li>
+            <li><a href="<?= \yii\helpers\Url::toRoute(['/category/index'])?>">Категории</a></li>
+            <li><a href="#">О детях</a></li>
+            <li><a href="#">Мамам</a></li>
+            <li><a href="#">Отдых с детьми</a></li>
+        </ul>
+    </nav>
+
+    <div class="top_menu_mobile">
+        <a href="#">Logo</a>
+        <button class="show_menu">
+            <i class="fa fa-bars"></i>
+        </button>
+    </div>
+    <ul class="top_nav_mobile">
+        <li><a href="#">Беременность</a></li>
+        <li><a href="#">О детях</a></li>
+        <li><a href="#">Мамам</a></li>
+        <li><a href="#">Отдых с детьми</a></li>
+    </ul>
+</header>
+
 <div class="wrap">
     <?php
-    NavBar::begin([
+    /*NavBar::begin([
         'brandLabel' => 'My Company',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
@@ -58,7 +84,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
-    NavBar::end();
+    NavBar::end();*/
     ?>
 
     <div class="container">

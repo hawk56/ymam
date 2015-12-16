@@ -33,4 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    <?php
+        $categories = \common\models\Category::find()->all();
+        foreach($categories as $category)
+        {
+            echo '<a href="'.\yii\helpers\Url::toRoute(['/post/index', 'id' => $category->id]).'">'.$category->name.'</a><br>';
+        }
+    ?>
+
 </div>

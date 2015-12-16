@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
     <div class="wrapText">
-        <img width="300" src="<?= \yii\helpers\Url::base(); ?>/upload/images/<?= $model->img ?>" alt="" style="float:left;">
+        <img width="300" src="<?= $model->getImage()->getUrl('760x300') ?>" alt="" style="float:left;">
         <p>
             <?= $model->text ?>
         </p>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <?= DetailView::widget([
+    <?php /*DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -54,22 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'status',
         ],
-    ]) ?>
+    ])*/ ?>
 
     <?php
-
-        echo \frontend\components\CommentWidget::widget();
-
-        foreach($com as $item)
-        {
-            echo $this->render('/comment/_view', [
-                'model' => $item,
-            ]);
-        }
-
-        /*echo "<pre>";
-        print_r($com);
-        echo "</pre>";*/
+        $image = $model->getImage();
+        echo "<img src='".$image->getUrl('300x')."'>";
     ?>
+
 
 </div>

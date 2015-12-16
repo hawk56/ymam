@@ -106,6 +106,118 @@ a.desc:after {
 .art_link {
     display: block;
     position: relative;
-    width: 400px;
-    height: 300px;
+    width: 230px;
+    font-size: 24px;
+    color: #333333;
+    line-height: 24px;
+    border-radius: 5px;
+    transition: all .2s ease;
+}
+.art_link:hover {
+    color: #d26028;
+    text-decoration: none;
+}
+.article_title {
+    margin-top: 14px;
+}
+.line_pink { border-bottom: 5px solid #de298c; }
+.line_green { border-bottom: 5px solid #8cc63e; }
+.line_green { border-bottom: 5px solid #f38f1d; }
+.medium-teal-line { border-bottom: 5px solid #00b1b0 }
+.dark-teal-line { border-bottom: 5px solid #367989 }
+.light-teal-line { border-bottom: 5px solid #67c7c5 }
+.green-line { border-bottom: 5px solid #8cc63e }
+.yellow-line { border-bottom: 5px solid #ffd200 }
+.pink-line { border-bottom: 5px solid #de298c }
+.grey-line { border-bottom: 5px solid #cccccc }
+.orange-line { border-bottom: 5px solid #f38f1d }
+.black-line { border-bottom: 5px solid #333333 }
+.red-line { border-bottom: 5px solid red }
+
+.post {
+    display: inline-block;
+    margin: 15px 20px;
+    vertical-align: top;
+}
+.article_info {
+    font-size: 14px;
+    color: #818181;
+}
+
+
+.top_menu {
+    background-color: #67c7c5;
+    /*padding: 17px;*/
+    text-align: center;
+}
+.top_nav {
+    list-style: none;
+    overflow: auto;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.top_nav li {
+    float: left;
+    padding: 17px 22px;
+    transition: all .3s;
+}
+.top_nav li:hover {
+    background-color: #8bd6d4;
+}
+.top_nav li a {
+    font-family: 'Roboto', san-serif;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 23px;
+    text-decoration: none;
+}
+.top_nav_mobile {
+    display: none;
+    background-color: #67c7c5;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+.top_menu_mobile {
+    background-color: #67c7c5;
+    display: none;
+    text-align: left;
+    min-height: 61px;
+}
+.top_nav_mobile li {
+    padding: 17px 22px;
+    transition: all .3s;
+}
+.top_nav_mobile li:hover {
+    background-color: #8bd6d4;
+}
+.top_nav_mobile li a {
+    font-family: 'Roboto', san-serif;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 23px;
+    text-decoration: none;
+}
+.show_menu {
+    padding: 17px 22px;
+    float: right;
+    font-size: 23px;
+    color: #ffffff;
+    border: none;
+    background: transparent;
+}
+.show_menu:hover {
+    background: #8bd6d4;
+}
+
+@media screen and (max-width:780px) {
+    .top_menu_mobile {
+        display: block;
+    }
+    .top_menu{
+        display: none;
+    }
 }
